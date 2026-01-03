@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjeev Sharma | Sr. Commercial Costing Engineer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh; 
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        /* Fixed Elements */
+        .back-btn, .social-links { position: fixed; z-index: 1000; transition: all 0.3s ease; }
+        
+        .back-btn { 
+            top: 25px; left: 25px; 
+            background: rgba(255, 255, 255, 0.95); 
+            border: 2px solid #27ae60;
+            padding: 12px 24px; 
+            border-radius: 30px; 
+            font-weight: 700; 
+            color: #27ae60; 
+            cursor: pointer; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            opacity: 0; 
+            transform: translateY(-20px);
+            font-size: 0.95em;
+        }
+        
+        .back-btn.show { opacity: 1; transform: translateY(0); }
+        
+        .back-btn:hover { 
+            background: linear-gradient(135deg, #27ae60, #2ecc71); 
+            color: white;
+            transform: translateY(-3px) scale(1.05); 
+            box-shadow: 0 15px 40px rgba(39, 174, 96, 0.4); 
+        }
+
+        /* Social Links */
+        .social-links { 
+            top: 25px; right: 25px; 
+            display: flex; gap: 15px; 
+            opacity: 0; 
+            transform: translateY(-20px);
+        }
+        
+        .social-links.show { opacity: 1; transform: translateY(0); }
+        
+        .social-btn { 
+            width: 55px; height: 55px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5em; 
+            color: white; 
+            text-decoration: none; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .whatsapp { background: #25D366; }
+        .linkedin { background: #0077B5; }
+        
+        .social-btn:hover { 
+            transform: translateY(-10px) rotate(360deg) scale(1.2); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Cover Section */
+        .cover-container { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        .cover { 
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 25px; 
+            box-shadow: 0 50px 150px rgba(0, 0, 0, 0.3);
+            position: relative; 
+            padding: 60px 50px;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            animation: slideInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid rgba(39, 174, 96, 0.2);
+        }
+
+        @keyframes slideInUp { 
+            from { 
+                transform: translateY(60px) scale(0.9); 
+                opacity: 0; 
+            } 
+            to { 
+                transform: translateY(0) scale(1); 
+                opacity: 1; 
+            } 
+        }
+
+        .cover-profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 40px rgba(39, 174, 96, 0.3);
+            border: 4px solid #27ae60;
+        }
+
+        h1.title-main { 
+            font-size: 2.8em; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 50%, #f39c12 100%);
+            background-size: 200% 200%;
+            background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1; 
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .subtitle { 
+            font-size: 1.1em; 
+            color: #f39c12; 
+            font-weight: 700; 
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .designation {
+            font-size: 1em;
+            color: #666;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .name-footer { 
+            font-size: 1.8em; 
+            color: #27ae60; 
+            font-weight: 900; 
+            text-align: center; 
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            font-size: 0.95em;
+            color: #555;
+            text-align: center;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .enter-btn {
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.4);
+            margin-top: 20px;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(39, 174, 96, 0.6);
+        }
+
+        /* Portfolio Content */
+        .portfolio-content { 
+            padding: 100px 30px 80px; 
+            display: none; 
+            max-width: 1400px; 
+            margin: 0 auto;
+            background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+            min-height: 100vh;
+        }
+
+        .portfolio-content.active { display: block; }
+
+        .section { 
+            margin: 60px 0; 
+            padding: 60px;
+            background: white;
+            border-radius: 20px; 
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-left: 5px solid #27ae60;
+        }
+
+        .section.animate { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .section h2 { 
+            font-size: 2.5em; 
+            color: #27ae60;
+            text-align: center; 
+            margin-bottom: 40px;
+            position: relative;
+            font-weight: 800;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .profile-grid { 
+            display: grid; 
+            grid-template-columns: 350px 1fr; 
+            gap: 50px; 
+            align-items: start;
+            margin-bottom: 40px;
+        }
+
+        .profile-img { 
+            width: 100%; 
+            max-width: 320px;
+            height: 380px; 
+            border-radius: 15px; 
+            object-fit: cover; 
+            box-shadow: 0 20px 60px rgba(39, 174, 96, 0.25);
+            transition: all 0.5s;
+            border: 3px solid #27ae60;
+        }
+
+        .profile-img:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 30px 80px rgba(39, 174, 96, 0.35);
+        }
+
+        .summary-content h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .summary-text {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .contact-details {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(46, 204, 113, 0.1));
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1em;
+            color: #333;
+            line-height: 2;
+            border-left: 4px solid #27ae60;
+        }
+
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 30px;
+        }
+
+        .project-card { 
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.08), rgba(46, 204, 113, 0.08));
+            padding: 30px; 
+            border-radius: 15px; 
+            transition: all 0.5s;
+            border: 2px solid rgba(39, 174, 96, 0.2);
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .project-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: -100%; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent); 
+            transition: left 0.6s;
+        }
+
+        .project-card:hover::before { left: 100%; }
+
+        .project-card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 25px 70px rgba(39, 174, 96, 0.25);
+            border-color: #27ae60;
+        }
+
+        .project-img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            transition: transform 0.4s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover .project-img { transform: scale(1.08); }
+
+        .project-title {
+            font-size: 1.4em;
+            color: #27ae60;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .project-meta {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .project-card ul {
+            margin-top: 15px;
+            list-style: none;
+            padding: 0;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .project-card li {
+            color: #555;
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .project-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .skill-box {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.08), rgba(46, 204, 113, 0.08));
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid rgba(39, 174, 96, 0.2);
+            transition: all 0.4s;
+        }
+
+        .skill-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(39, 174, 96, 0.2);
+            border-color: #27ae60;
+        }
+
+        .skill-box h3{
+            font-size: 1.5em;
+            color: #27ae60;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .skill-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .skill-box li {
+            font-size: 1em;
+            color: #555;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .skill-box li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-size: 1.2em;
+        }
+
+        .education-item {
+            font-size: 1.05em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .education-item strong {
+            color: #27ae60;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) { 
+            .profile-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .cover { 
+                padding: 40px 30px;
+            }
+
+            h1.title-main {
+                font-size: 2em;
+            }
+
+            .section { 
+                padding: 30px;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .projects-grid { 
+                grid-template-columns: 1fr; 
+            }
+
+            .social-links {
+                gap: 10px;
+            }
+
+            .social-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="backToCover()">← Back to Cover</button>
+    
+    <div class="social-links" id="social">
+        <a href="https://wa.me/919149882065?text=Hi%20Sanjeev%2C%20your%20portfolio%20is%20impressive!" class="social-btn whatsapp" target="_blank" title="WhatsApp">💬</a>
+        <a href="https://www.linkedin.com/in/sanjeev-sharma-1625b125?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-btn linkedin" target="_blank" title="LinkedIn">💼</a>
+    </div>
+
+    <!-- Cover Section -->
+    <div class="cover-container" id="cover">
+        <div class="cover">
+            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/0ef2b62b-93e6-493e-bdf6-dd4999fbf5bc" alt="Sanjeev Sharma" class="cover-profile-img">
+            <h1 class="title-main">SANJEEV SHARMA</h1>
+            <p class="subtitle">Quantity Surveying • Billing • Planning</p>
+            <p class="designation">Sr. Commercial & Costing Engineer</p>
+            <p class="contact-info">
+                <strong>📞 +91 9149882065</strong><br>
+                <strong>📧 er.sanjeev25@gmail.com</strong><br>
+                Ballia, Uttar Pradesh
+            </p>
+            <button class="enter-btn" onclick="enterPortfolio()">EXPLORE PORTFOLIO →</button>
+        </div>
+    </div>
+
+    <!-- Portfolio Content -->
+    <div class="portfolio-content" id="portfolio">
+        <!-- Summary Section -->
+        <div class="section" id="summary-section">
+            <h2>Professional Summary</h2>
+            <div class="profile-grid">
+                <img src="Photo.jpeg" alt="Sanjeev Sharma - Civil Engineer" class="profile-img">
+                <div class="summary-content">
+                    <h3>15+ Years of Excellence in Civil Engineering</h3>
+                    <p class="summary-text">
+                        Result-oriented professional with extensive experience in Construction Operations, Quantity Surveying, Planning & Project Execution. Proven expertise in managing multiple high-value road and infrastructure projects simultaneously. Comprehensive knowledge of MoRTH specifications and IS Codes with strong analytical and organizational skills. Committed to ensuring strict QA/QC norms and delivering projects on time within budget.
+                    </p>
+                    <div class="contact-details">
+                        <strong>📱 Phone:</strong> +91 9149882065<br>
+                        <strong>📧 Email:</strong> er.sanjeev25@gmail.com<br>
+                        <strong>📍 Location:</strong> Rajmalpur Urf Nawapura, Ballia U.P 221712
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section" id="experience-section">
+            <h2>Professional Experience</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="Image-1.jpeg" alt="Data Center" class="project-img">
+                    <h3 class="project-title">Sr. Commercial & Costing Engineer</h3>
+                    <p class="project-meta"><strong>SHUBHAM EPC PVT. LTD.</strong></p>
+                    <p class="project-meta">Data Center Building | Navi Mumbai | 2025-Present</p>
+                    <ul>
+                        <li>Progress Tracking & Monitoring Timelines and Milestones</li>
+                        <li>Cash Flow Management</li>
+                        <li>Client Bill Preparation & Submission</li>
+                    </ul>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="Jammu-Srinagar-National-Highway-now-NH-44-1024x682.webp" alt="HAM Highway" class="project-img">
+                    <h3 class="project-title">Sr. QS Engineer</h3>
+                    <p class="project-meta"><strong>APCO INFRATECH PVT. LTD.</strong></p>
+                    <p class="project-meta">HAM Project PKG-17 | Jammu-Katra | 2023-2025 | ₹1547.91 Cr</p>
+                    <ul>
+                        <li>Progress Tracking & RFI Management</li>
+                        <li>Escalation Analysis & Material Reconciliation</li>
+                        <li>Client Bill Preparation & Submission</li>
+                    </ul>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="Bikaner.jpg" alt="Narmada Canal" class="project-img">
+                    <h3 class="project-title">Sr. QS Engineer</h3>
+                    <p class="project-meta"><strong>AG CONSTRUCTION</strong></p>
+                    <p class="project-meta">EPC Greenfield Highway NH-754K | Bikaner-Rajasthan | 2021-2023 | ₹330.85 Cr</p>
+                    <ul>
+                        <li>Project Progress Monitoring & Planning</li>
+                        <li>Drawing Status Management & Coordination</li>
+                        <li>Client & Subcontractor Billing Management</li>
+                    </ul>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <img src="Ramban.jpg" alt="NH-44" class="project-img">
+                    <h3 class="project-title">QS Engineer</h3>
+                    <p class="project-meta"><strong>ASHAPURA ROADLINES SUBCON-HCC</strong></p>
+                    <p class="project-meta">Ramban-Banihal NH-44 | Banihal, Jammu & Kashmir | 2018-2021</p>
+                    <ul>
+                        <li>Progress Tracking & Monitoring Timelines and Milestones</li>
+                        <li>Subcontractor Billing Management & Verification</li>
+                        <li>Technical Drafting & Drawing Management</li>
+                    </ul>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <img src="Narmada-Canal-gujarat.webp" alt="Branch Canal" class="project-img">
+                    <h3 class="project-title">QS Engineer</h3>
+                    <p class="project-meta"><strong>ASHAPURA ROADLINES SUBCON-HCC</strong></p>
+                    <p class="project-meta">Kutchh Branch Canal | Kutchh, Gujarat | 2014-2018 | ₹345.31 Cr</p>
+                    <ul>
+                        <li>Progress Evaluation & Subcontractor Invoicing</li>
+                        <li>Technical Drawings & Drafting</li>
+                        <li>Quantity Calculation & Billing Support</li>
+                    </ul>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <img src="PBA.jpg" alt="BOT Highway" class="project-img">
+                    <h3 class="project-title">Asst. QS Engineer</h3>
+                    <p class="project-meta"><strong>PBA INFRASTRUCTURE LTD.</strong></p>
+                    <p class="project-meta">BOT Project BHUJ-BHACHAU SH-42 | Kutchh, Gujarat | 2010-2014</p>
+                    <ul>
+                        <li>Quantity Calculation & Client Billing Support</li>
+                        <li>Drawing Status & BBS Preparation</li>
+                        <li>Project Documentation & Record Maintenance</li>
+                    </ul>
+                </div>
+
+                <!-- Project 7
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=280&fit=crop" alt="Buildings" class="project-img">
+                    <h3 class="project-title">Asst. QS Engineer</h3>
+                    <p class="project-meta"><strong>DARSHAN CONSTRUCTION</strong></p>
+                    <p class="project-meta">Residential & Educational Buildings | Faizabad-Lucknow | 2010-2011</p>
+                    <ul>
+                        <li>Quantity calculation & billing documentation</li>
+                        <li>Drawing management & Bar Bending Schedules</li>
+                        <li>Construction planning & supervision</li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section" id="skills-section">
+            <h2>Technical Skills & Education</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Data Analysis & Excel VBA</li>
+                        <li>Client & Subcontractor Billing</li>
+                        <li>AutoCAD 2D/3D Design</li>
+                        <li>SketchUP Modeling</li>
+                        <li>MS Project Planning</li>
+                        <li>Quantity Estimation</li>
+                        <!-- <li>Progress Tracking & RFIs</li> -->
+                        <li>Power BI & Power Query</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box">
+                    <h3>Education & Certifications</h3>
+                    <div class="education-item">
+                        <strong>Diploma in Civil Engineering</strong><br>
+                        Maharana Pratap Polytechnic<br>
+                        Gorakhpur, U.P (2005-2008)
+                    </div>
+                    <div class="education-item" style="margin-top: 20px;">
+                        <strong>Technical Knowledge:</strong><br>
+                        MoRTH Specifications<br>
+                        IS Codes & Standards
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>Languages & Soft Skills</h3>
+                    <div class="education-item">
+                        <strong>Hindi:</strong> Fluent<br>
+                        <strong>English:</strong> Average<br>
+                    </div>
+                    <div class="education-item" style="margin-top: 20px;">
+                        <strong>Professional Strengths:</strong><br>
+                        Team Leadership<br>
+                        Client Relations<br>
+                        Problem Solving
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const backBtn = document.querySelector('.back-btn');
+        const social = document.getElementById('social');
+
+        function enterPortfolio() {
+            document.getElementById('cover').style.opacity = '0';
+            document.getElementById('cover').style.pointerEvents = 'none';
+            setTimeout(() => {
+                document.getElementById('cover').style.display = 'none';
+                document.getElementById('portfolio').classList.add('active');
+                backBtn.classList.add('show');
+                social.classList.add('show');
+                animateSections();
+            }, 400);
+        }
+
+        function backToCover() {
+            document.getElementById('portfolio').classList.remove('active');
+            backBtn.classList.remove('show');
+            social.classList.remove('show');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('animate'));
+            document.getElementById('cover').style.display = 'flex';
+            document.getElementById('cover').style.opacity = '1';
+            document.getElementById('cover').style.pointerEvents = 'auto';
+        }
+
+        function showSection(id) {
+            enterPortfolio();
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(s => {
+                s.style.display = 'none';
+                s.classList.remove('animate');
+            });
+            const targetSection = document.getElementById(id + '-section');
+            targetSection.style.display = 'block';
+            setTimeout(() => {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                targetSection.classList.add('animate');
+            }, 500);
+        }
+
+        function animateSections() {
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.section').forEach(section => observer.observe(section));
+        }
+
+        // Scroll reveal animations
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    section.classList.add('animate');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
